@@ -23,8 +23,8 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-public class TestAop {
-	private static final Logger logger = LoggerFactory.getLogger(TestAop.class);
+public class DemoAop {
+	private static final Logger logger = LoggerFactory.getLogger(DemoAop.class);
 
 	@Before("@annotation(org.springframework.web.bind.annotation.RequestMapping)")
 	public void doRequestBefore(JoinPoint joinPoint) throws Throwable {
@@ -56,7 +56,7 @@ public class TestAop {
 		Object[] objs = joinPoint.getArgs();
 		for (Object obj : objs) {
 			if (obj instanceof UserBookTestVo) {
-				logger.info("after UserBookTestVo is : {}  ", new Gson().toJson(obj));
+				logger.info("***aop after*** UserBookTestVo is : {}  ", new Gson().toJson(obj));
 			}
 		}
 	}
