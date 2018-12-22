@@ -1,0 +1,6 @@
+CREATE TABLE user_info(
+  seq INTEGER,
+  name VARCHAR(10),
+  age INTEGER,
+  PRIMARY KEY(seq)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

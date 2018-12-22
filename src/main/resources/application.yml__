@@ -1,0 +1,62 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /demo
+
+docker:
+  ip: 192.168.43.99
+
+logging:
+  config: classpath:logback.xml
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+
+spring:
+  datasource:
+    mysql:
+      jdbc-url: jdbc:mysql://${docker.ip}:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: ENC(Qu+uze5RGio=)
+      driver-class-name: com.mysql.jdbc.Driver
+      xmlpath: classpath:/mapper/*.xml
+      max-idle: 10
+      max-wait: 10000
+      min-idle: 5
+      initial-size: 5
+      validation-query: select 1
+      test-on.borrow: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 18800
+  flyway:
+    locations: classpath:db
+    url: ${spring.datasource.mysql.jdbc-url}
+    user: ${spring.datasource.mysql.username}
+    password: ${spring.datasource.mysql.password}
+    baseline-on-migrate: true
+    table: flyway_version
+    enabled: true
+  cache:
+    type: caffeine
+    cache-names: userInfo
+    caffeine:
+      spec: maximumSize=10,expireAfterAccess=30s
+  redis:
+    database: 0
+    host: ${docker.ip}
+    port: 6379
+    password:
+    timeout: 2000
+    jedis:
+      pool:
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+        max-wait: -1
+#oauth2
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+

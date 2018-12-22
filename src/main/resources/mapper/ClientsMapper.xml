@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.basic.dao.ClientsMapper">
+  <resultMap id="BaseResultMap" type="com.demo.basic.vo.domain.Clients">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="clientId" jdbcType="VARCHAR" property="clientid" />
+    <result column="resourceIds" jdbcType="VARCHAR" property="resourceids" />
+    <result column="isSecretRequired" jdbcType="BIT" property="issecretrequired" />
+    <result column="clientSecret" jdbcType="VARCHAR" property="clientsecret" />
+    <result column="isScoped" jdbcType="BIT" property="isscoped" />
+    <result column="scope" jdbcType="VARCHAR" property="scope" />
+    <result column="authorizedGrantTypes" jdbcType="VARCHAR" property="authorizedgranttypes" />
+    <result column="registeredRedirectUri" jdbcType="VARCHAR" property="registeredredirecturi" />
+    <result column="authorities" jdbcType="VARCHAR" property="authorities" />
+    <result column="isAutoApprove" jdbcType="BIT" property="isautoapprove" />
+    <result column="accessTokenValiditySeconds" jdbcType="INTEGER" property="accesstokenvalidityseconds" />
+    <result column="refreshTokenValiditySeconds" jdbcType="INTEGER" property="refreshtokenvalidityseconds" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="modifyTime" jdbcType="TIMESTAMP" property="modifytime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, clientId, resourceIds, isSecretRequired, clientSecret, isScoped, scope, authorizedGrantTypes, 
+    registeredRedirectUri, authorities, isAutoApprove, accessTokenValiditySeconds, refreshTokenValiditySeconds, 
+    createTime, modifyTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from clients
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="findClientByClientId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from clients
+    where clientId = #{clientId,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from clients
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.demo.basic.vo.domain.Clients">
+    insert into clients (id, clientId, resourceIds, 
+      isSecretRequired, clientSecret, isScoped, 
+      scope, authorizedGrantTypes, registeredRedirectUri, 
+      authorities, isAutoApprove, accessTokenValiditySeconds, 
+      refreshTokenValiditySeconds, createTime, 
+      modifyTime)
+    values (#{id,jdbcType=VARCHAR}, #{clientid,jdbcType=VARCHAR}, #{resourceids,jdbcType=VARCHAR}, 
+      #{issecretrequired,jdbcType=BIT}, #{clientsecret,jdbcType=VARCHAR}, #{isscoped,jdbcType=BIT}, 
+      #{scope,jdbcType=VARCHAR}, #{authorizedgranttypes,jdbcType=VARCHAR}, #{registeredredirecturi,jdbcType=VARCHAR}, 
+      #{authorities,jdbcType=VARCHAR}, #{isautoapprove,jdbcType=BIT}, #{accesstokenvalidityseconds,jdbcType=INTEGER}, 
+      #{refreshtokenvalidityseconds,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifytime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.demo.basic.vo.domain.Clients">
+    insert into clients
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="clientid != null">
+        clientId,
+      </if>
+      <if test="resourceids != null">
+        resourceIds,
+      </if>
+      <if test="issecretrequired != null">
+        isSecretRequired,
+      </if>
+      <if test="clientsecret != null">
+        clientSecret,
+      </if>
+      <if test="isscoped != null">
+        isScoped,
+      </if>
+      <if test="scope != null">
+        scope,
+      </if>
+      <if test="authorizedgranttypes != null">
+        authorizedGrantTypes,
+      </if>
+      <if test="registeredredirecturi != null">
+        registeredRedirectUri,
+      </if>
+      <if test="authorities != null">
+        authorities,
+      </if>
+      <if test="isautoapprove != null">
+        isAutoApprove,
+      </if>
+      <if test="accesstokenvalidityseconds != null">
+        accessTokenValiditySeconds,
+      </if>
+      <if test="refreshtokenvalidityseconds != null">
+        refreshTokenValiditySeconds,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="modifytime != null">
+        modifyTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null">
+        #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceids != null">
+        #{resourceids,jdbcType=VARCHAR},
+      </if>
+      <if test="issecretrequired != null">
+        #{issecretrequired,jdbcType=BIT},
+      </if>
+      <if test="clientsecret != null">
+        #{clientsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="isscoped != null">
+        #{isscoped,jdbcType=BIT},
+      </if>
+      <if test="scope != null">
+        #{scope,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizedgranttypes != null">
+        #{authorizedgranttypes,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredredirecturi != null">
+        #{registeredredirecturi,jdbcType=VARCHAR},
+      </if>
+      <if test="authorities != null">
+        #{authorities,jdbcType=VARCHAR},
+      </if>
+      <if test="isautoapprove != null">
+        #{isautoapprove,jdbcType=BIT},
+      </if>
+      <if test="accesstokenvalidityseconds != null">
+        #{accesstokenvalidityseconds,jdbcType=INTEGER},
+      </if>
+      <if test="refreshtokenvalidityseconds != null">
+        #{refreshtokenvalidityseconds,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifytime != null">
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.demo.basic.vo.domain.Clients">
+    update clients
+    <set>
+      <if test="clientid != null">
+        clientId = #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceids != null">
+        resourceIds = #{resourceids,jdbcType=VARCHAR},
+      </if>
+      <if test="issecretrequired != null">
+        isSecretRequired = #{issecretrequired,jdbcType=BIT},
+      </if>
+      <if test="clientsecret != null">
+        clientSecret = #{clientsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="isscoped != null">
+        isScoped = #{isscoped,jdbcType=BIT},
+      </if>
+      <if test="scope != null">
+        scope = #{scope,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizedgranttypes != null">
+        authorizedGrantTypes = #{authorizedgranttypes,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredredirecturi != null">
+        registeredRedirectUri = #{registeredredirecturi,jdbcType=VARCHAR},
+      </if>
+      <if test="authorities != null">
+        authorities = #{authorities,jdbcType=VARCHAR},
+      </if>
+      <if test="isautoapprove != null">
+        isAutoApprove = #{isautoapprove,jdbcType=BIT},
+      </if>
+      <if test="accesstokenvalidityseconds != null">
+        accessTokenValiditySeconds = #{accesstokenvalidityseconds,jdbcType=INTEGER},
+      </if>
+      <if test="refreshtokenvalidityseconds != null">
+        refreshTokenValiditySeconds = #{refreshtokenvalidityseconds,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifytime != null">
+        modifyTime = #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.demo.basic.vo.domain.Clients">
+    update clients
+    set clientId = #{clientid,jdbcType=VARCHAR},
+      resourceIds = #{resourceids,jdbcType=VARCHAR},
+      isSecretRequired = #{issecretrequired,jdbcType=BIT},
+      clientSecret = #{clientsecret,jdbcType=VARCHAR},
+      isScoped = #{isscoped,jdbcType=BIT},
+      scope = #{scope,jdbcType=VARCHAR},
+      authorizedGrantTypes = #{authorizedgranttypes,jdbcType=VARCHAR},
+      registeredRedirectUri = #{registeredredirecturi,jdbcType=VARCHAR},
+      authorities = #{authorities,jdbcType=VARCHAR},
+      isAutoApprove = #{isautoapprove,jdbcType=BIT},
+      accessTokenValiditySeconds = #{accesstokenvalidityseconds,jdbcType=INTEGER},
+      refreshTokenValiditySeconds = #{refreshtokenvalidityseconds,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyTime = #{modifytime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

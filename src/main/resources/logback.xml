@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_HOME" value="/logs" />
+    <property name="CHARSET" value="UTF-8" />
+    <property name="PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n" />
+    <!-- 控制台輸出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoder默認配置為PartternLayoutEncoder    -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${PATTERN}</pattern>
+            <charset>${CHARSET}</charset>
+        </encoder>
+    </appender>
+    <!-- 持續輸出的日誌檔案 -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_HOME}/myLog.log</file>
+        <encoder>
+            <pattern>${PATTERN}</pattern>
+            <charset>${CHARSET}</charset>
+        </encoder>
+    </appender>
+    <!-- 按照每天生成日誌文件 -->
+    <appender name="SpringLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日誌文件輸出的文件名-->
+            <FileNamePattern>${LOG_HOME}/SpringLog-%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+            <!--日誌文件保留天數-->
+            <MaxHistory>30</MaxHistory>
+            <!--日誌文件最大的大小-->
+            <MaxFileSize>10MB</MaxFileSize>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${PATTERN}</pattern>
+            <charset>${CHARSET}</charset>
+        </encoder>
+    </appender>
+    <!-- 按照每天生成日誌文件 -->
+    <appender name="ServiceLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日誌文件輸出的文件名-->
+            <FileNamePattern>${LOG_HOME}/Service-%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+            <!--日誌文件保留天數-->
+            <MaxHistory>30</MaxHistory>
+            <!--日誌文件最大的大小-->
+            <MaxFileSize>10MB</MaxFileSize>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${PATTERN}</pattern>
+            <charset>${CHARSET}</charset>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework" level="error">
+        <appender-ref ref="SpringLog"/>
+    </logger>
+    <logger name="com.demo" level="info">
+        <appender-ref ref="ServiceLog"/>
+    </logger>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
