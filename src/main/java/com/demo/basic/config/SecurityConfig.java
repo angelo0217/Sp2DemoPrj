@@ -1,6 +1,5 @@
 package com.demo.basic.config;
 
-import com.demo.basic.service.test.impl.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

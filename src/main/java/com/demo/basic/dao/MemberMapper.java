@@ -20,9 +20,5 @@ public interface MemberMapper {
 
     Member selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Member record);
-
-    int updateByPrimaryKey(Member record);
-
     Member selectByName(String userName);
 }

@@ -1,4 +1,4 @@
-package com.demo.basic.vo;
+package com.demo.basic.vo.security;
 
 import com.demo.basic.Const;
 import com.demo.basic.util.OauthClientUtils;
@@ -18,15 +18,15 @@ import java.util.Set;
  * @email loveangelo0217@gmail.com
  * @since 1.0
  */
-public class BootClientDetailsVo implements ClientDetails {
+public class ClientDetailVo implements ClientDetails {
 
     private Clients clients;
 
-    public BootClientDetailsVo(Clients client) {
+    public ClientDetailVo(Clients client) {
         this.clients = client;
     }
 
-    public BootClientDetailsVo() {
+    public ClientDetailVo() {
     }
 
     @Override

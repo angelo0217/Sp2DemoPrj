@@ -1,4 +1,4 @@
-package com.demo.basic.service.test;
+package com.demo.basic.service.security;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -1,7 +1,7 @@
 package com.demo.basic.service.test.impl;
 
 import com.demo.basic.service.test.ClientService;
-import com.demo.basic.vo.BootClientDetailsVo;
+import com.demo.basic.vo.security.ClientDetailVo;
 import com.demo.basic.vo.domain.Clients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -34,7 +34,7 @@ public class DemoClientDetailService implements ClientDetailsService {
             throw new ClientRegistrationException("客户端不存在");
         }
 
-        return new BootClientDetailsVo(client);
+        return new ClientDetailVo(client);
     }
 
 }

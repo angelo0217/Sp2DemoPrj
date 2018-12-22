@@ -6,11 +6,17 @@
     <result column="userName" jdbcType="VARCHAR" property="username" />
     <result column="userPwd" jdbcType="VARCHAR" property="userpwd" />
     <result column="userRole" jdbcType="VARCHAR" property="userrole" />
+    <result column="non_expired" jdbcType="BIT" property="nonExpired" />
+    <result column="non_locked" jdbcType="BIT" property="nonLocked" />
+    <result column="credentials_non_expired" jdbcType="BIT" property="credentialsNonExpired" />
+    <result column="enabled" jdbcType="BIT" property="enabled" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="modifyTime" jdbcType="TIMESTAMP" property="modifytime" />
   </resultMap>
+
   <sql id="Base_Column_List">
-    id, userName, userPwd, userRole, createTime, modifyTime
+    id, userName, userPwd, userRole, non_expired, non_locked, credentials_non_expired,
+    enabled, createTime, modifyTime
   </sql>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -34,83 +40,12 @@
 
   <insert id="insert" parameterType="com.demo.basic.vo.domain.Member">
     insert into member (id, userName, userPwd, 
-      userRole, createTime, modifyTime
-      )
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userpwd,jdbcType=VARCHAR}, 
-      #{userrole,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{modifytime,jdbcType=TIMESTAMP}
-      )
+      userRole, non_expired, non_locked,
+      credentials_non_expired, enabled, createTime,
+      modifyTime)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userpwd,jdbcType=VARCHAR},
+      #{userrole,jdbcType=VARCHAR}, #{nonExpired,jdbcType=BIT}, #{nonLocked,jdbcType=BIT},
+      #{credentialsNonExpired,jdbcType=BIT}, #{enabled,jdbcType=BIT}, #{createtime,jdbcType=TIMESTAMP},
+      #{modifytime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.demo.basic.vo.domain.Member">
-    insert into member
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="username != null">
-        userName,
-      </if>
-      <if test="userpwd != null">
-        userPwd,
-      </if>
-      <if test="userrole != null">
-        userRole,
-      </if>
-      <if test="createtime != null">
-        createTime,
-      </if>
-      <if test="modifytime != null">
-        modifyTime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="userpwd != null">
-        #{userpwd,jdbcType=VARCHAR},
-      </if>
-      <if test="userrole != null">
-        #{userrole,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifytime != null">
-        #{modifytime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.demo.basic.vo.domain.Member">
-    update member
-    <set>
-      <if test="username != null">
-        userName = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="userpwd != null">
-        userPwd = #{userpwd,jdbcType=VARCHAR},
-      </if>
-      <if test="userrole != null">
-        userRole = #{userrole,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null">
-        createTime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifytime != null">
-        modifyTime = #{modifytime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.demo.basic.vo.domain.Member">
-    update member
-    set userName = #{username,jdbcType=VARCHAR},
-      userPwd = #{userpwd,jdbcType=VARCHAR},
-      userRole = #{userrole,jdbcType=VARCHAR},
-      createTime = #{createtime,jdbcType=TIMESTAMP},
-      modifyTime = #{modifytime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
 </mapper>

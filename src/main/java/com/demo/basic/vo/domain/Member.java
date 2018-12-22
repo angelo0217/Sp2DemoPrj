@@ -1,15 +1,16 @@
 package com.demo.basic.vo.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created on 2018-12-19
+ * Created on 2018-12-22
  *
  * @author dean
  * @email loveangelo0217@gmail.com
  * @since 1.0
  */
-public class Member {
+public class Member implements Serializable {
     private Integer id;
 
     private String username;
@@ -17,6 +18,14 @@ public class Member {
     private String userpwd;
 
     private String userrole;
+
+    private Boolean nonExpired;
+
+    private Boolean nonLocked;
+
+    private Boolean credentialsNonExpired;
+
+    private Boolean enabled;
 
     private Date createtime;
 
@@ -52,6 +61,38 @@ public class Member {
 
     public void setUserrole(String userrole) {
         this.userrole = userrole == null ? null : userrole.trim();
+    }
+
+    public Boolean getNonExpired() {
+        return nonExpired;
+    }
+
+    public void setNonExpired(Boolean nonExpired) {
+        this.nonExpired = nonExpired;
+    }
+
+    public Boolean getNonLocked() {
+        return nonLocked;
+    }
+
+    public void setNonLocked(Boolean nonLocked) {
+        this.nonLocked = nonLocked;
+    }
+
+    public Boolean getCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Date getCreatetime() {

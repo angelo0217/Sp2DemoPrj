@@ -1,7 +1,7 @@
 package com.demo.basic.config;
 
 import com.demo.basic.service.test.impl.DemoClientDetailService;
-import com.demo.basic.service.test.impl.UserServiceImpl;
+import com.demo.basic.service.security.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

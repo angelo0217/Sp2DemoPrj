@@ -31,9 +31,13 @@ create table member (
   userName varchar(100) not null,
   userPwd varchar(255) not null,
   userRole varchar(20) not null,
+	non_expired tinyint(1),
+	non_locked tinyint(1),
+	credentials_non_expired tinyint(1),
+	enabled tinyint(1),
   createTime timestamp default current_timestamp comment '创建时间',
   modifyTime timestamp default current_timestamp on update current_timestamp comment '更新时间'
 );
 ALTER TABLE member ADD CONSTRAINT member_UN UNIQUE KEY (userName) ;
-INSERT INTO member (id, userName, userPwd, userRole, createTime, modifyTime) VALUES(1, 'admin', '$2a$10$aHEaP4O/SM/iEfd42Zy3tuw1PTOnN7EjmiwPzVJ0yFOgwTnP4fBka', 'ADMIN_ROLE', '2018-12-19 10:00:00', '2018-12-19 10:00:00');
-INSERT INTO member (id, userName, userPwd, userRole, createTime, modifyTime) VALUES(2, 'user', '$2a$10$aHEaP4O/SM/iEfd42Zy3tuw1PTOnN7EjmiwPzVJ0yFOgwTnP4fBka', 'USER_ROLE', '2018-12-19 10:00:00', '2018-12-19 10:00:00');
+INSERT INTO member (id, userName, userPwd, userRole, non_expired, non_locked, credentials_non_expired, enabled, createTime, modifyTime) VALUES(1, 'admin', '$2a$10$aHEaP4O/SM/iEfd42Zy3tuw1PTOnN7EjmiwPzVJ0yFOgwTnP4fBka', 'ADMIN_ROLE', 1, 1, 1, 1,'2018-12-19 10:00:00', '2018-12-19 10:00:00');
+INSERT INTO member (id, userName, userPwd, userRole, non_expired, non_locked, credentials_non_expired, enabled, createTime, modifyTime) VALUES(2, 'user', '$2a$10$aHEaP4O/SM/iEfd42Zy3tuw1PTOnN7EjmiwPzVJ0yFOgwTnP4fBka', 'USER_ROLE', 1, 1, 1, 1, '2018-12-19 10:00:00', '2018-12-19 10:00:00');
