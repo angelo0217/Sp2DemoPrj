@@ -1,6 +1,7 @@
 package com.demo.basic.controller;
 
 import com.demo.basic.RtnCode;
+import com.demo.basic.annotation.MyAnnotation;
 import com.demo.basic.exception.DemoException;
 import com.demo.basic.vo.Response;
 import org.slf4j.Logger;
@@ -27,6 +28,7 @@ public class ExceptionController {
     private static final Logger logger = LoggerFactory.getLogger(ExceptionController.class);
 
     @ExceptionHandler(value = Exception.class)
+    @MyAnnotation(value = "Exception", dolog = true)
     public Response exCenter(HttpServletRequest req, Exception ex){
         Response response = new Response();
         if(ex instanceof DemoException){

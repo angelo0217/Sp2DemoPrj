@@ -1,6 +1,7 @@
 package com.demo.basic.aop;
 
 import com.demo.basic.annotation.MyAnnotation;
+import com.demo.basic.vo.Response;
 import com.demo.basic.vo.TestVo;
 import com.demo.basic.vo.UserBookTestVo;
 import com.google.gson.Gson;
@@ -67,16 +68,15 @@ public class DemoAop {
 		Object result = joinPoint.proceed();
 		Object[] objs = joinPoint.getArgs();
 
+		logger.info("***aop around*** result :" + new Gson().toJson(result));
 		if(myAnnotation.dolog()) {
 			for (Object obj : objs) {
 				// System.out.println(JsonUtils.ObjToJson(obj));
-				if (obj instanceof TestVo) {
-					TestVo test = (TestVo) obj;
-					if (test != null) {
-						logger.info("***aop around*** around aop get name :{}", test.getName());
-					} else {
-						logger.info("***aop around*** user is null");
-					}
+				if (obj instanceof UserBookTestVo) {
+					logger.info("***aop around*** around aop UserBookTestVo :{}", new Gson().toJson(obj));
+				} else if (obj instanceof Exception) {
+					Exception ex = (Exception) obj;
+					logger.info("***aop around*** around aop excption :{}", ex.getMessage());
 				}
 			}
 			logger.info("***aop around*** Aop MyAnnotation :" + myAnnotation.value());

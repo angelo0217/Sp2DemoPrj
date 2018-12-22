@@ -1,5 +1,6 @@
 package com.demo.basic.controller;
 
+import com.demo.basic.annotation.MyAnnotation;
 import com.demo.basic.service.test.DbTestService;
 import com.demo.basic.vo.Response;
 import com.demo.basic.vo.UserBookTestVo;
@@ -49,6 +50,7 @@ public class DbTestController {
      * @throws Exception
      */
     @RequestMapping("/allRollBack")
+    @MyAnnotation(value = "allRollBack", dolog = true)
     public Response allRollBack(@RequestBody UserBookTestVo userBookTestVo) throws Exception{
         return dbTestService.doAfterEx(userBookTestVo);
     }
