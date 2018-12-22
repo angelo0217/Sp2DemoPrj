@@ -23,8 +23,6 @@ public class UserDetailVo  implements UserDetails {
 
     private Member member;
     public UserDetailVo(Member member){
-        System.out.println("==========================");
-        System.out.println(new Gson().toJson(member));
         this.member = member;
     }
 
