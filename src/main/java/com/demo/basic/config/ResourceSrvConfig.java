@@ -36,14 +36,19 @@ public class ResourceSrvConfig extends ResourceServerConfigurerAdapter {
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
+//        http.authorizeRequests().anyRequest().authenticated();
         http
                 .anonymous().disable()
                 .authorizeRequests()
+//                .antMatchers("/doWrite/**").permitAll()
                 .antMatchers("/doRead/**").access("#oauth2.hasScope('read')")
                 .antMatchers("/doWrite/**").access("#oauth2.hasScope('write')")
                 .antMatchers("/doAdmin/**").access("hasAuthority('ADMIN_ROLE')")
                 .antMatchers("/doUser/**").access("hasAuthority('USER_ROLE')")
                 .antMatchers(HttpMethod.GET,"/doDoubleChk/**").access("(#oauth2.hasScope('write') or #oauth2.hasScope('read')) and hasRole('ROLE_USER')")
-                .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
 }

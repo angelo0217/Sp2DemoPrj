@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -23,8 +22,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     /**
-     * 这一步的配置是必不可少的，否则SpringBoot2会自动配置一个AuthenticationManager,覆盖掉内存中的用户
+     * 這一步的配置是必不可少的，否則SpringBoot2會自動配置一個AuthenticationManager,覆蓋掉記憶體中的使用者
      */
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
     @Override
@@ -33,27 +33,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * 設定web的認證權限
-     * @param http
-     * @throws Exception
-     */
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http
-                .requestMatchers().anyRequest()
-                .and()
-                .authorizeRequests()
-                //oauthException  api權限都開
-                .antMatchers("/oauth2/*").permitAll();
-    }
-
-    /**
-     * 支持多种编码，通过密码的前缀区分编码方式
+     * 支援多種編碼，通過密碼的首碼區分編碼方式
      * @return
      */
     @Bean("passwordEncoder")
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+
 }

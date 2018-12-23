@@ -9,7 +9,6 @@ import com.demo.basic.vo.domain.BookInfo;
 import com.demo.basic.vo.domain.UserInfo;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
