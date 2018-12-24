@@ -15,7 +15,8 @@ import java.util.Map;
 /**
  * MyBatis直接執行Sql的方法
  * Created on 2018-12-19
- *
+ * 參考網址
+ * https://gitee.com/free/EntityMapper/blob/master/src/main/java/com/github/abel533/sql/SqlMapper.java/?dir=0&filepath=src/main/java/com/github/abel533/sql/SqlMapper.java&oid=522385417e49282a7036b6544cb83f4405b8d7f3&sha=c1425e7e157425f32daffbfd97fe576343ff6f1a
  * @author dean
  * @email loveangelo0217@gmail.com
  * @since 1.0
