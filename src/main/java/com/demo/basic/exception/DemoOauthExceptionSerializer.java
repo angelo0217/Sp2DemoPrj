@@ -1,4 +1,4 @@
-package com.demo.basic.config.oauthException;
+package com.demo.basic.exception;
 
 import com.demo.basic.RtnCode;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -27,11 +27,13 @@ public class DemoOauthExceptionSerializer extends StdSerializer<DemoOauthExcepti
 
     @Override
     public void serialize(DemoOauthException value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         gen.writeStartObject();
         gen.writeNumberField("code", RtnCode.AUTH_ERROR);
         gen.writeStringField("msg", "("+String.valueOf(value.getHttpErrorCode())+")" + value.getMessage());
         gen.writeStringField("path", request.getServletPath());
+
         if (value.getAdditionalInformation()!=null) {
             for (Map.Entry<String, String> entry : value.getAdditionalInformation().entrySet()) {
                 String key = entry.getKey();
@@ -39,6 +41,7 @@ public class DemoOauthExceptionSerializer extends StdSerializer<DemoOauthExcepti
                 gen.writeStringField(key, add);
             }
         }
+
         gen.writeEndObject();
     }
 }

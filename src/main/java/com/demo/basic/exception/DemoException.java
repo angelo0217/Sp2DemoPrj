@@ -10,29 +10,29 @@ package com.demo.basic.exception;
 public class DemoException  extends  Exception{
 
     public DemoException(int errCode, String errMsg, String exMsg){
-        this.errCode = errCode;
-        this.errMsg = errMsg;
+        this.code = errCode;
+        this.msg = errMsg;
         this.exMsg = exMsg;
     }
 
-    private int errCode;
-    private String errMsg;
+    private int code;
+    private String msg;
     private String exMsg;
 
-    public int getErrCode() {
-        return errCode;
+    public int getCode() {
+        return code;
     }
 
-    public void setErrCode(int errCode) {
-        this.errCode = errCode;
+    public void setCode(int code) {
+        this.code = code;
     }
 
-    public String getErrMsg() {
-        return errMsg;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setErrMsg(String errMsg) {
-        this.errMsg = errMsg;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public String getExMsg() {

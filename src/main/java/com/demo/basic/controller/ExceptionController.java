@@ -33,8 +33,8 @@ public class ExceptionController {
         Response response = new Response();
         if(ex instanceof DemoException){
             DemoException demoException = (DemoException) ex;
-            response.setCode(demoException.getErrCode());
-            response.setMsg(demoException.getErrMsg());
+            response.setCode(demoException.getCode());
+            response.setMsg(demoException.getMsg());
 
             if(!StringUtils.isEmpty(demoException.getExMsg())){
                 logger.error("exception :{}", demoException.getExMsg());

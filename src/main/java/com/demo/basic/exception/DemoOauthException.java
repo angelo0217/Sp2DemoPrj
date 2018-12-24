@@ -1,4 +1,4 @@
-package com.demo.basic.config.oauthException;
+package com.demo.basic.exception;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;

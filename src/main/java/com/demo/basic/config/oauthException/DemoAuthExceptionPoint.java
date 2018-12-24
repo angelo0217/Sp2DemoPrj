@@ -33,6 +33,7 @@ public class DemoAuthExceptionPoint implements AuthenticationEntryPoint {
 
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(response.getOutputStream(), res);
