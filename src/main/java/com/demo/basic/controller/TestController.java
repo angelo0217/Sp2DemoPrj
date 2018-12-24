@@ -62,7 +62,7 @@ public class TestController {
     @Autowired
     BookInfoMapper bookInfoMapper;
 
-    @RequestMapping("/hello3")
+    @RequestMapping("/test_completable_future")
     public AsyncVo hello3(@RequestBody TestVo testIn ){
         Object[] objects = new Object[]{userInfoMapper, bookInfoMapper};
         CompletableFuture cf = CompletableFuture.completedFuture(objects).thenApplyAsync(objs -> {

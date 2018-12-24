@@ -52,8 +52,8 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private WebResponseExceptionTranslator demoResponseExceptionTranslator;
     /**
-     *  配置token获取合验证时的策略
-     *  */
+     *  配置token獲取合驗證時的策略
+     */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 
