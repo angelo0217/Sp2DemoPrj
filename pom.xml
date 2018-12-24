@@ -23,7 +23,16 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <quartz.version>2.1.7</quartz.version>
+        <!--<security.version>2.3.3.RELEASE</security.version>-->
+        <security.version>[2.3.4,)</security.version>
+        <spring-security-jwt.version>1.0.9.RELEASE</spring-security-jwt.version>
+        <mysql.version>5.1.44</mysql.version>
+        <flyway.version>5.2.4</flyway.version>
+        <jasypt.version>2.0.0</jasypt.version>
+        <mybatis.version>1.3.2</mybatis.version>
+        <mybatis.shashopt.version>3.5.0-SNAPSHOT</mybatis.shashopt.version>
+        <aspectj.version>1.8.5</aspectj.version>
+        <gson.version>2.8.5</gson.version>
     </properties>
     <dependencies>
         <dependency>
@@ -51,12 +60,12 @@
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
-            <version>1.8.5</version>
+            <version>${aspectj.version}</version>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.8.5</version>
+            <version>${aspectj.version}</version>
         </dependency>
         <!-- Spring Cache -->
         <dependency>
@@ -75,23 +84,19 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+            <!--<version>${security.version}</version>-->
         </dependency>
         <!-- Oauth2 -->
         <dependency>
             <groupId>org.springframework.security.oauth</groupId>
             <artifactId>spring-security-oauth2</artifactId>
-            <version>[2.3.4,)</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security.oauth.boot</groupId>
-            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-            <!--<version>2.0.0.RELEASE</version>-->
+            <version>${security.version}</version>
         </dependency>
         <!-- JWT -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-jwt</artifactId>
-            <version>1.0.0.RELEASE</version>
+            <version>${spring-security-jwt.version}</version>
             <!--<optional>true</optional>-->
         </dependency>
         <!-- 将token存储在redis中 -->
@@ -109,40 +114,46 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.3.2</version>
+            <version>${mybatis.version}</version>
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<groupId>org.mybatis</groupId>-->
+                    <!--<artifactId>mybatis</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.mybatis</groupId>-->
+            <!--<artifactId>mybatis</artifactId>-->
+            <!--<version>${mybatis.shashopt.version}</version>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.44</version>
+            <version>${mysql.version}</version>
         </dependency>
 
         <!-- Db版控 -->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>5.2.4</version>
+            <version>${flyway.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.8.5</version>
+            <version>${gson.version}</version>
         </dependency>
 
         <!--設定檔加密-->
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>
             <artifactId>jasypt-spring-boot-starter</artifactId>
-            <version>2.0.0</version>
+            <version>${jasypt.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>r05</version>
-        </dependency>
-
 
     </dependencies>
 
@@ -155,41 +166,4 @@
         </plugins>
     </build>
 
-    <!--<repositories>-->
-    <!--<repository>-->
-    <!--<id>spring-snapshots</id>-->
-    <!--<name>Spring Snapshots</name>-->
-    <!--<url>https://repo.spring.io/snapshot</url>-->
-    <!--<snapshots>-->
-    <!--<enabled>true</enabled>-->
-    <!--</snapshots>-->
-    <!--</repository>-->
-    <!--<repository>-->
-    <!--<id>spring-milestones</id>-->
-    <!--<name>Spring Milestones</name>-->
-    <!--<url>https://repo.spring.io/milestone</url>-->
-    <!--<snapshots>-->
-    <!--<enabled>false</enabled>-->
-    <!--</snapshots>-->
-    <!--</repository>-->
-    <!--</repositories>-->
-
-    <!--<pluginRepositories>-->
-    <!--<pluginRepository>-->
-    <!--<id>spring-snapshots</id>-->
-    <!--<name>Spring Snapshots</name>-->
-    <!--<url>https://repo.spring.io/snapshot</url>-->
-    <!--<snapshots>-->
-    <!--<enabled>true</enabled>-->
-    <!--</snapshots>-->
-    <!--</pluginRepository>-->
-    <!--<pluginRepository>-->
-    <!--<id>spring-milestones</id>-->
-    <!--<name>Spring Milestones</name>-->
-    <!--<url>https://repo.spring.io/milestone</url>-->
-    <!--<snapshots>-->
-    <!--<enabled>false</enabled>-->
-    <!--</snapshots>-->
-    <!--</pluginRepository>-->
-    <!--</pluginRepositories>-->
 </project>

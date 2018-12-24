@@ -130,11 +130,11 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
             public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
                 String userName = authentication.getUserAuthentication().getName();
 
-                User user = (User) authentication.getUserAuthentication().getPrincipal();// 登陸後放進去的UserDetail實現類一直查看link{SecurityConfiguration}
+//                User user = (User) authentication.getUserAuthentication().getPrincipal();// 登陸後放進去的UserDetail實現類一直查看link{SecurityConfiguration}
                 /** 自訂義一些token屬性 ***/
                 final Map<String, Object> additionalInformation = new HashMap<>();
                 additionalInformation.put("userName", userName);
-                additionalInformation.put("roles", user.getAuthorities());
+//                additionalInformation.put("roles", user.getAuthorities());
                 ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInformation);
                 OAuth2AccessToken enhancedToken = super.enhance(accessToken, authentication);
                 return enhancedToken;

@@ -51,7 +51,7 @@ public class UserInfoRepositoryImpl implements UserInfoRepository {
     }
 
     @Override
-    public Optional<UserInfoOps> getOptionalUser(int seq) {
+    public Optional<UserInfo> getOptionalUser(int seq) {
         return Optional.empty();
     }
 

@@ -38,5 +38,5 @@ public interface UserInfoMapper {
             @Result(property = "age", column = "age", jdbcType = JdbcType.INTEGER, javaType = Integer.class)
     })
     @Select("select name, age from user_info where seq = #{seq}")
-    Optional<UserInfoOps> getOptionalUser(int seq);
+    Optional<UserInfo> getOptionalUser(int seq);
 }
