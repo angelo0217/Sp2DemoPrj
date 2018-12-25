@@ -8,6 +8,8 @@ import com.demo.basic.vo.TestVo;
 import com.demo.basic.vo.domain.BookInfo;
 import com.demo.basic.vo.domain.UserInfo;
 import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +28,7 @@ import java.util.concurrent.CompletableFuture;
  */
 @RestController
 public class TestController {
-
+    private static final Logger logger = LoggerFactory.getLogger(TestController.class);
     /**
      * 綁定annotation
      * @param testIn
@@ -35,6 +37,7 @@ public class TestController {
     @RequestMapping("/hello")
     @MyAnnotation(value = "hello world", dolog = true)
     public TestVo hello(@RequestBody TestVo testIn){
+        logger.info("controller print hello all");
         TestVo testVo = new TestVo();
         testVo.setName("hello");
         testVo.setAge(10);

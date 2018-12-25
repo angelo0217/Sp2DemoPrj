@@ -55,7 +55,7 @@ public class CacheConfig {
     private Map<String, RedisCacheConfiguration> getRedisCacheConfigurationMap() {
         Map<String, RedisCacheConfiguration> redisCacheConfigurationMap = new HashMap<>();
         //SsoCache和BasicDataCache進行過期的時間配置
-        redisCacheConfigurationMap.put("userInfo", this.getRedisCacheConfigurationWithTtl(2));
+        redisCacheConfigurationMap.put("userInfo", this.getRedisCacheConfigurationWithTtl(3600));
         return redisCacheConfigurationMap;
     }
 
