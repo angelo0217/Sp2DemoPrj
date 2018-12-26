@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 拆分Reis存儲位置
+ * 拆分Redis存儲位置
  * Created on 2018/12/26
  *
  * @author dean
@@ -91,10 +91,20 @@ public class RedisConfig {
 
     public JedisPoolConfig jedisPoolConfig() {
         JedisPoolConfig poolConfig = new JedisPoolConfig();
+
+        //控制一個pool可分配多少個jedis實例,用來替換上面的redis.maxActive,如果是jedis 2.4以後用該屬
         //poolConfig.setMaxTotal(maxTotal);
+        //連接池中的最小空閒連接
         poolConfig.setMinIdle(minIdle);
+        //最大空閒數
         poolConfig.setMaxIdle(maxIdle);
-        poolConfig.setMaxWaitMillis(20000);
+        //連接的最小閒置時間 默認1800000毫秒(30分鐘)
+        poolConfig.setMaxWaitMillis(300000);
+        //每次釋放連接的最大數目,預設3
+        poolConfig.setNumTestsPerEvictionRun(10);
+        //逐出掃描的時間間隔(毫秒) 如果為負數,則不運行逐出執行緒, 默認-1
+        poolConfig.setTimeBetweenEvictionRunsMillis(-1);
+        //是否在從池中取出連接前進行檢驗,如果檢驗失敗,則從池中去除連接並嘗試取出另一個
         poolConfig.setTestOnBorrow(testOnBorrow);
         poolConfig.setTestOnReturn(testOnReturn);
         return poolConfig;
