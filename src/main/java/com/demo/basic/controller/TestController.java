@@ -67,12 +67,12 @@ public class TestController {
 
     @RequestMapping("/test_completable_future")
     public AsyncVo hello3(@RequestBody TestVo testIn ){
-        Object[] objects = new Object[]{userInfoMapper, bookInfoMapper};
-        CompletableFuture cf = CompletableFuture.completedFuture(objects).thenApplyAsync(objs -> {
+        int seq = 1;
+        CompletableFuture cf = CompletableFuture.completedFuture(seq).thenApplyAsync(objs -> {
             try {
                 System.out.println(" 1 start");
                 Thread.sleep(3000);
-                UserInfo userInfo = ((UserInfoMapper) objs[0]).selectByPrimaryKey(1);
+                UserInfo userInfo = userInfoMapper.selectByPrimaryKey(objs);
                 System.out.println(new Gson().toJson(userInfo));
                 return  userInfo;
             } catch (Exception e) {
@@ -81,11 +81,11 @@ public class TestController {
             } finally {
                 System.out.println(" 1 done");
             }
-        }).thenCombine(CompletableFuture.completedFuture(objects).thenApplyAsync(objs -> {
+        }).thenCombine(CompletableFuture.completedFuture(seq).thenApplyAsync(objs -> {
             try {
                 System.out.println(" 2 start");
                 Thread.sleep(7000);
-                BookInfo bookInfo = ((BookInfoMapper) objs[1]).selectByPrimaryKey(1);
+                BookInfo bookInfo = bookInfoMapper.selectByPrimaryKey(objs);
                 System.out.println(new Gson().toJson(bookInfo));
                 return bookInfo;
             } catch (Exception e) {

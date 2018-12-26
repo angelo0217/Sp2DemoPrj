@@ -30,10 +30,12 @@ import java.util.Properties;
  * @email loveangelo0217@gmail.com
  * @since 1.0
  */
-@Intercepts({@Signature(type = StatementHandler.class, method = "query", args = {Statement.class, ResultHandler.class}),
+@Intercepts({
+        @Signature(type = StatementHandler.class, method = "query", args = {Statement.class, ResultHandler.class}),
         @Signature(type = StatementHandler.class, method = "update", args = {Statement.class}),
-        @Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class, Integer.class}),
-        @Signature(type = StatementHandler.class, method = "batch", args = { Statement.class })})
+//        @Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class, Integer.class}),
+        @Signature(type = StatementHandler.class, method = "batch", args = { Statement.class })
+})
 public class MyBatisInterceptor implements Interceptor {
 
     @Override

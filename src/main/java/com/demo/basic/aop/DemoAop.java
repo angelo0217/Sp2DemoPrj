@@ -34,7 +34,6 @@ public class DemoAop {
 
 		Object[] objs = joinPoint.getArgs();
 		for (Object obj : objs) {
-			// System.out.println(JsonUtils.ObjToJson(obj));
 			if (obj instanceof TestVo) {
 				TestVo test = (TestVo) obj;
 				if(test != null) {
@@ -71,7 +70,6 @@ public class DemoAop {
 		logger.info("***aop around*** result :" + new Gson().toJson(result));
 		if(myAnnotation.dolog()) {
 			for (Object obj : objs) {
-				// System.out.println(JsonUtils.ObjToJson(obj));
 				if (obj instanceof UserBookTestVo) {
 					logger.info("***aop around*** around aop UserBookTestVo :{}", new Gson().toJson(obj));
 				} else if (obj instanceof Exception) {

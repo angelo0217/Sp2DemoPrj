@@ -3,6 +3,7 @@ package com.demo.basic.config;
 import com.demo.basic.service.security.impl.UserServiceImpl;
 import com.demo.basic.service.test.impl.DemoClientDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -47,6 +48,7 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
     DemoClientDetailService demoClientDetailService;
 
     @Autowired
+    @Qualifier("tokenRedis")
     RedisConnectionFactory redisConnectionFactory;
 
     @Autowired

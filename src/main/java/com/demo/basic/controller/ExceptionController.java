@@ -32,6 +32,7 @@ public class ExceptionController {
     public Response exCenter(HttpServletRequest req, Exception ex){
         Response response = new Response();
         if(ex instanceof DemoException){
+            logger.error("***exception handle***");
             DemoException demoException = (DemoException) ex;
             response.setCode(demoException.getCode());
             response.setMsg(demoException.getMsg());
