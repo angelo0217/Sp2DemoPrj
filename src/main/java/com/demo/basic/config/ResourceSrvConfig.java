@@ -44,7 +44,7 @@ public class ResourceSrvConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/doWrite/*").access("#oauth2.hasScope('write')")
                 .antMatchers("/doAdmin/*").access("hasAuthority('ADMIN_ROLE')")
                 .antMatchers("/doUser/*").access("hasAuthority('USER_ROLE')")
-                .antMatchers(HttpMethod.GET,"/doDoubleChk/*").access("(#oauth2.hasScope('write') or #oauth2.hasScope('read')) and hasRole('ROLE_USER')")
+                .antMatchers(HttpMethod.GET,"/doDoubleChk/*").access("(#oauth2.hasScope('write') or #oauth2.hasScope('read')) and hasAuthority('USER_ROLE')")
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()

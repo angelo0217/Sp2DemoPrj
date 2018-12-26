@@ -37,7 +37,7 @@ public class DemoAop {
 			if (obj instanceof TestVo) {
 				TestVo test = (TestVo) obj;
 				if(test != null) {
-					logger.info("***aop before*** get name :{}", test.getName());
+					logger.info("***aop before*** get req :{}", new Gson().toJson(test));
 				} else {
 					logger.info("***aop before*** user is null  ");
 				}

@@ -82,7 +82,8 @@ public class RedisConfig {
         JedisConnectionFactory connectionFactory = new JedisConnectionFactory(jedisPoolConfig());
         connectionFactory.setHostName(redisHostName);
         connectionFactory.setPort(redisPort);
-        connectionFactory.setUsePool(true);
+//        下面這行會影響cache
+//        connectionFactory.setUsePool(true);
         connectionFactory.setPassword(password);
         connectionFactory.setDatabase(cacheDatabase);
         connectionFactory.afterPropertiesSet();
@@ -111,11 +112,11 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedisCacheManager cacheManager() {
+    public RedisCacheManager cacheManager(@Qualifier("cacheRedis") JedisConnectionFactory factory) {
 
         return new RedisCacheManager(
-                RedisCacheWriter.nonLockingRedisCacheWriter(cacheRedis()),
-                this.getRedisCacheConfigurationWithTtl(30), // 默認策略，未配置的 key 會使用這個
+                RedisCacheWriter.nonLockingRedisCacheWriter(factory),
+                this.getRedisCacheConfigurationWithTtl(60), // 默認策略，未配置的 key 會使用這個
                 this.getRedisCacheConfigurationMap() // 指定 key 策略
         );
     }
@@ -123,7 +124,7 @@ public class RedisConfig {
     private Map<String, RedisCacheConfiguration> getRedisCacheConfigurationMap() {
         Map<String, RedisCacheConfiguration> redisCacheConfigurationMap = new HashMap<>();
         //SsoCache和BasicDataCache進行過期的時間配置
-        redisCacheConfigurationMap.put("userInfo", this.getRedisCacheConfigurationWithTtl(3600));
+        redisCacheConfigurationMap.put("userInfo", this.getRedisCacheConfigurationWithTtl(20));
         return redisCacheConfigurationMap;
     }
 

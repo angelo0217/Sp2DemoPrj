@@ -47,7 +47,7 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
     DemoClientDetailService demoClientDetailService;
 
     @Autowired
-    @Qualifier("tokenRedis")
+//    @Qualifier("tokenRedis")
     RedisConnectionFactory redisConnectionFactory;
 
     @Autowired

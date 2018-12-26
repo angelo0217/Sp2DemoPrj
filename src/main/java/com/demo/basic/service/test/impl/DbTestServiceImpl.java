@@ -80,7 +80,7 @@ public class DbTestServiceImpl implements DbTestService {
         if(userBookTestVo.isThrowEx()){
 
             logger.info("ops error do rollback");
-            throw new DemoException(RtnCode.ERROR, "測試roll back", null);
+            throw new DemoException(RtnCode.ERROR, "throw ex 測試roll back", null);
         }
 
         response.setData("do insert ok");
@@ -96,18 +96,18 @@ public class DbTestServiceImpl implements DbTestService {
         UserInfo userInfo = new UserInfo();
         userInfo.setName(userBookTestVo.getName());
         userInfo.setAge(userBookTestVo.getAge());
-
+        userInfoRepository.insert(userInfo);
         logger.info("insert user : {}", userInfo.getName());
 
         BookInfo bookInfo = new BookInfo();
         bookInfo.setBookName(userBookTestVo.getBookName());
         bookInfo.setBookPrice(userBookTestVo.getBookPrice());
-
+        bookInfoRepository.insert(bookInfo);
         logger.info("insert book : {}", bookInfo.getBookName());
 
         if(userBookTestVo.isThrowEx()){
             logger.info("ops error always not rollback");
-            throw new DemoException(RtnCode.ERROR, "測試 do not roll back", null);
+            throw new DemoException(RtnCode.ERROR, "throw ex 測試 do not roll back", null);
         }
         response.setData("do insert ok");
         return response;
