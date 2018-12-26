@@ -1,4 +1,4 @@
-package com.demo.basic.service.test.impl;
+package com.demo.basic.service.security.impl;
 
 import com.demo.basic.service.test.ClientService;
 import com.demo.basic.vo.security.ClientDetailVo;

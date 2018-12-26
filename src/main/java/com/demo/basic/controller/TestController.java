@@ -70,7 +70,7 @@ public class TestController {
         int seq = 1;
         CompletableFuture cf = CompletableFuture.completedFuture(seq).thenApplyAsync(objs -> {
             try {
-                System.out.println(" 1 start");
+                System.out.println(" 1 run start");
                 Thread.sleep(3000);
                 UserInfo userInfo = userInfoMapper.selectByPrimaryKey(objs);
                 System.out.println(new Gson().toJson(userInfo));
