@@ -5,7 +5,8 @@ MAINTAINER Dean dean@gmail.com
 ENV SERVER_IP=192.168.43.99
 
 RUN mkdir /workspace \
-    mkdir /workspace/logs
+    && mkdir /workspace/logs \
+    && chmod 777 /workspace -R
 
 COPY basic-1.0-SNAPSHOT.jar /workspace/basic.war
 
