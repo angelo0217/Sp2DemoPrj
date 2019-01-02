@@ -2,7 +2,7 @@ FROM java:8u111-jre-alpine
 
 MAINTAINER Dean dean@gmail.com
 
-ENV SERVER_IP=192.168.43.99
+ENV SERVER_IP=192.168.43.22
 
 RUN mkdir /workspace \
     && mkdir /workspace/logs \
