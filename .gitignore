@@ -12,8 +12,6 @@
 
 target/*
 
-src/test/*
-
 .mvn/*
 # Package Files #
 *.war
