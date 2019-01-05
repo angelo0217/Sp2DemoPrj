@@ -1,7 +1,7 @@
 node {
 	def remote = [:]
 	remote.name = "node-1"
-	remote.host = "192.168.43.22"
+	remote.host = ${dockerIp}
 	remote.allowAnyHosts = true
    stage('Say hello'){
        cleanWs()
@@ -29,7 +29,11 @@ node {
 		remote.user = user
 		remote.password = password
 		stage('shutdown docker'){
-			sshCommand remote: remote, command: 'docker stop basic && docker rm basic && docker rmi demo/basic && cd /opt/vms/ && rm -rf *';
+		    try {
+			    sshCommand remote: remote, command: 'docker stop basic && docker rm basic && docker rmi demo/basic && cd /opt/vms/ && rm -rf *';
+			}catch (exc) {
+                echo 'shutdown docker error'
+            }
 		}
 		stage('move jar'){
             //sshCommand remote: remote, command: 'for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done'
