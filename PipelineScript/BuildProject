@@ -1,7 +1,7 @@
 node {
 	def remote = [:]
 	remote.name = "node-1"
-	remote.host = ${dockerIp}
+	remote.host = "${dockerIp}"
 	remote.allowAnyHosts = true
    stage('Say hello'){
        cleanWs()
