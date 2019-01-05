@@ -1,0 +1,25 @@
+
+    def testBasic() {
+    def command = """{
+        \"serverIp\" : \"${serverIp}\",
+        \"range\":\"${range}\",
+        \"name\":\"${name}\",
+        \"age\":${age}
+      }"""
+    echo(command)
+    response = httpRequest (consoleLogResponseBody: true,
+      contentType: 'APPLICATION_JSON',
+      httpMode: 'POST',
+      connectionTimeout: 60,
+      requestBody: command,
+      url: "http://192.168.0.105:8881/testChrome",
+      validResponseCodes: '200',
+      validResponseContent: '"msg":"success"')
+   return response
+    }
+    node {
+        stage('TestWeb'){
+           cleanWs()
+           testBasic()
+       }
+    }
