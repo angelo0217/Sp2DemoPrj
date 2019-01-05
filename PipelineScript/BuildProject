@@ -1,25 +1,44 @@
+node {
+	def remote = [:]
+	remote.name = "node-1"
+	remote.host = "192.168.43.22"
+	remote.allowAnyHosts = true
+   stage('Say hello'){
+       cleanWs()
+       echo 'Hello World 1'
+   }
+   stage('git clone'){
+		withCredentials([usernamePassword(credentialsId: 'deanGitLink', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+		    withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']) {
+		        sh 'echo ${GIT_USERNAME}'
+			    sh 'git clone --single-branch --branch ${branch} https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/angelo0217/Sp2DemoPrj.git'
+		    }
+		}
+   }
+   stage('maven build'){
+		withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']) {
+		    sh 'cd Sp2DemoPrj'
+		    dir ('Sp2DemoPrj') {
+		        sh 'pwd'
+			    sh 'mvn clean package -Dmaven.test.skip=true'
+		    }
+		}
+   }
 
-    def testBasic() {
-    def command = """{
-        \"serverIp\" : \"${serverIp}\",
-        \"range\":\"${range}\",
-        \"name\":\"${name}\",
-        \"age\":${age}
-      }"""
-    echo(command)
-    response = httpRequest (consoleLogResponseBody: true,
-      contentType: 'APPLICATION_JSON',
-      httpMode: 'POST',
-      connectionTimeout: 60,
-      requestBody: command,
-      url: "http://192.168.0.105:8881/testChrome",
-      validResponseCodes: '200',
-      validResponseContent: '"msg":"success"')
-   return response
+    withCredentials([usernamePassword(credentialsId: 'MainMachine', passwordVariable: 'password', usernameVariable: 'user')]) {
+		remote.user = user
+		remote.password = password
+		stage('shutdown docker'){
+			sshCommand remote: remote, command: 'docker stop basic && docker rm basic && docker rmi demo/basic && cd /opt/vms/ && rm -rf *';
+		}
+		stage('move jar'){
+            //sshCommand remote: remote, command: 'for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done'
+			sshPut remote: remote, from: '/var/jenkins_home/workspace/testPPL/Sp2DemoPrj/target/basic-1.0-SNAPSHOT.jar', into: '/opt/vms'
+			sshPut remote: remote, from: '/var/jenkins_home/workspace/testPPL/Sp2DemoPrj/doc/Dockerfile', into: '/opt/vms'
+		}
+		stage('build docker'){
+			sshCommand remote: remote, command: 'cd /opt/vms/ && docker build -t="demo/basic" . && docker run -itd -v /opt/vms/log:/workspace/logs --name basic -d -p 8888:8888 demo/basic'
+		}
     }
-    node {
-        stage('TestWeb'){
-           cleanWs()
-           testBasic()
-       }
-    }
+
+}
