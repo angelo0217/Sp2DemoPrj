@@ -10,11 +10,16 @@ import com.demo.basic.vo.domain.UserInfo;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.jdbc.datasource.SmartDataSource;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.sql.DataSource;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -95,5 +100,16 @@ public class TestController {
             }
         }), (user, book) -> new AsyncVo(user, book ));
         return (AsyncVo) cf.join();
+    }
+
+    @Autowired
+    BeanFactory beanFactory;
+    @GetMapping("/closedb")
+    public String close() throws Exception{
+        DataSource dataSource = (DataSource) beanFactory.getBean("mysqlDataSource");
+//        if (!(dataSource instanceof DataSource) || ((SmartDataSource) dataSource).shouldClose(dataSource.getConnection())) {
+            dataSource.getConnection().close();
+//        }
+        return "success";
     }
 }

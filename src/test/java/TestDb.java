@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -55,9 +56,11 @@ public class TestDb {
     @Test
     public void testEn(){
 
-        StringEncryptor stringEncryptor = (StringEncryptor) beanFactory.getBean("jasyptStringEncryptor");
-        System.out.println(stringEncryptor.encrypt("123456"));
-        System.out.println(stringEncryptor.encrypt("123456"));
+//        StringEncryptor stringEncryptor = (StringEncryptor) beanFactory.getBean("jasyptStringEncryptor");
+        //System.out.println(stringEncryptor.encrypt("123456"));
+        PasswordEncoder stringEncryptor = (PasswordEncoder) beanFactory.getBean("passwordEncoder");
+        System.out.println(stringEncryptor.encode("abc123"));
+        System.out.println(stringEncryptor.encode("abc123"));
     }
 
 

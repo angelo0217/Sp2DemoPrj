@@ -40,6 +40,7 @@ public class ResourceSrvConfig extends ResourceServerConfigurerAdapter {
         http
                 .anonymous().disable()
                 .authorizeRequests()
+                .antMatchers("/actuator/**","/closedb").permitAll()
                 .antMatchers("/doRead/*").access("#oauth2.hasScope('read')")
                 .antMatchers("/doWrite/*").access("#oauth2.hasScope('write')")
                 .antMatchers("/doAdmin/*").access("hasAuthority('ADMIN_ROLE')")
@@ -50,4 +51,5 @@ public class ResourceSrvConfig extends ResourceServerConfigurerAdapter {
                 .exceptionHandling()
                 .accessDeniedHandler(new DemoAccessDeniedHandler());
     }
+    //http://localhost:8888/demo/oauth/token?username=admin&password=12345&grant_type=password&scope=read&client_id=admin&client_secret=abc123
 }
