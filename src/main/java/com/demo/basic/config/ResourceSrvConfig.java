@@ -40,7 +40,7 @@ public class ResourceSrvConfig extends ResourceServerConfigurerAdapter {
         http
                 .anonymous().disable()
                 .authorizeRequests()
-                .antMatchers("/actuator/**","/closedb").permitAll()
+                .antMatchers("/actuator/**","/closedb","/addDb").permitAll()
                 .antMatchers("/doRead/*").access("#oauth2.hasScope('read')")
                 .antMatchers("/doWrite/*").access("#oauth2.hasScope('write')")
                 .antMatchers("/doAdmin/*").access("hasAuthority('ADMIN_ROLE')")
